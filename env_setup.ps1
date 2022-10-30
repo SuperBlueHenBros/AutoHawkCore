@@ -16,3 +16,6 @@ python.exe -m venv env
 mkdir lib\bizhook
 git clone https://github.com/SuperBlueHenBros/Bizhook.git lib\bizhook
 python.exe -m pip install -e lib\bizhook
+
+# get the latest lua-components
+git clone https://github.com/SuperBlueHenBros/lua-components.git lib\lua-components
