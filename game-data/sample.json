@@ -1,0 +1,16 @@
+{
+    "game": "Sample Game",
+    "console": "NES",
+    "addresses": [
+        {
+            "name": "Sample Address 1",
+            "address": "0x00",
+            "description": "This is a sample address"
+        },
+        {
+            "name": "Sample Address 2",
+            "address": "0xFF",
+            "description": "This is a sample address"
+        }
+    ]
+}
