@@ -3,15 +3,16 @@ import logging
 from tkinter.filedialog import askopenfilename
 import config
 
+
+
+### Core Functions ###
 def load_file() -> dict:
     filename = askopenfilename()
 
-logging.basicConfig()
-logger = logging.getLogger()
 
 
-
-if __name__ == "__main__":
+### Setup Functions ###
+def setup_cli() -> None:
     parser = argparse.ArgumentParser(
                     prog = 'middle-tier',
                     description = 'Middle-tier for interfacing between bizhawk and our AI',
@@ -30,16 +31,25 @@ if __name__ == "__main__":
         logger.setLevel(logging.DEBUG)
     else:
         logger.setLevel(logging.WARNING)
-    
+
+
+
+def setup_all():
     logger.info("Setting up")
 
     config.check()
 
-    logging.info("Done setup")
-        
+    logger.info("Done setup")
 
 
 
-    
+### Logger Setup ###
+logging.basicConfig()
+logger = logging.getLogger() 
 
 
+
+### Main Function ###
+if __name__ == "__main__":
+    setup_cli()
+    setup_all()
