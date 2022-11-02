@@ -49,7 +49,11 @@ logger = logging.getLogger()
 
 
 
-### Main Function ###
+### Setup CLI Arguments ###
 if __name__ == "__main__":
     setup_cli()
-    setup_all()
+
+
+
+### Setup for CLI and Importing ###
+setup_all()
