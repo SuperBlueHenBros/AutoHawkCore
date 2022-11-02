@@ -2,6 +2,7 @@ import argparse
 import logging
 from tkinter.filedialog import askopenfilename
 import config
+import core
 
 
 
@@ -12,17 +13,18 @@ def load_file() -> dict:
 
 
 ### Setup Functions ###
-def setup_cli() -> None:
+def setup_cli() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
                     prog = 'middle-tier',
                     description = 'Middle-tier for interfacing between bizhawk and our AI',
                     epilog = 'This project still needs a new name :)')
+    parser.add_argument('-d', '--demo', action='store_true',
+                    help="Test demo using the sample config") 
     parser.add_argument('-g', '--game',
-                    help="Select a game config file to use")
+                    help="Select a specific game config file to use")
     parser.add_argument('-v', '--verbose',
                     action='store_true')
-    parser.add_argument('-vv', '--very_verbose',
-                    action='store_true')
+    parser.add_argument('-vv', '--very_verbose', action='store_true')
     args = parser.parse_args()  
 
     if args.verbose:
@@ -32,6 +34,7 @@ def setup_cli() -> None:
     else:
         logger.setLevel(logging.WARNING)
 
+    return args
 
 
 def setup_all():
@@ -51,9 +54,15 @@ logger = logging.getLogger()
 
 ### Setup CLI Arguments ###
 if __name__ == "__main__":
-    setup_cli()
+    args = setup_cli()
 
 
 
 ### Setup for CLI and Importing ###
 setup_all()
+
+
+### Main Runtime ###
+if __name__ == "__main__":
+    if args.demo:
+        core.demo()
