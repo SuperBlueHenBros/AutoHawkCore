@@ -1,4 +1,6 @@
 import games
+import connection
+import logging
 
 # TODO: move demos to their own testing file
 def demo_sample():
@@ -10,4 +12,11 @@ def run(game_path: str):
     logger.setLevel(logging.getLogger().getEffectiveLevel())
 
     game = games.load(game_path)
-    game.info()
+    if logger.level <= logging.INFO:
+        game.info()
+    conn = connection.connect()
+
+def loop():
+    while True:
+        pass
+    
