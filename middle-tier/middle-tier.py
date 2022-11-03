@@ -66,7 +66,7 @@ setup_all()
 if __name__ == "__main__":
     if args.demo:
         logger.info("running demo")
-        core.demo()
+        core.demo_sample()
     elif args.game: 
         logger.info(f"running game {args.game}")
         core.run(args.game)
