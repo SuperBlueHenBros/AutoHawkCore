@@ -6,5 +6,8 @@ def demo_sample():
     sample.info()
 
 def run(game_path: str):
+    logger = logging.getLogger(__name__) 
+    logger.setLevel(logging.getLogger().getEffectiveLevel())
+
     game = games.load(game_path)
     game.info()

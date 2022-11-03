@@ -8,6 +8,8 @@ class Game():
     def __init__(self, raw_info: dict) -> None:
         # TODO: make more logger more specific
         self.logger = logging.getLogger(__name__)  
+        self.logger.setLevel(logging.getLogger().getEffectiveLevel())
+
         self.read(raw_info)
         self.addresses = self.get_addresses(self.mapping)
 
