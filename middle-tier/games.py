@@ -34,9 +34,9 @@ class Game():
     def info(self):
         # display game information
         helper.seperator(title="Game Info:")
-        print(self.name)
-        print(self.console)
-        print([hex(addr) for addr in self.addresses])
+        print("Name:", self.name)
+        print("Console:", self.console)
+        print("Addresses:", [hex(addr) for addr in self.addresses])
         helper.seperator()
         
 
