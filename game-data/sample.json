@@ -1,16 +1,23 @@
 {
     "game": "Sample Game",
+    "description": "This is a general description or note regarding this file",
     "console": "NES",
+    "region": "NTSC",
     "addresses": [
         {
             "name": "Sample Address 1",
-            "address": "0x00",
+            "address": "0x0000",
             "description": "This is a sample address"
         },
         {
             "name": "Sample Address 2",
-            "address": "0xFF",
-            "description": "This is a sample address"
+            "address": "0x00FF",
+            "description": "This is a sample address",
+            "value": {
+                "0": "This is a description of this values meaning",
+                "1": "This is a description of this values meaning",
+                "4": "This is a description of this values meaning"
+            }
         }
     ]
 }
