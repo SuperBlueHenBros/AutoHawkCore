@@ -1,0 +1,59 @@
+{
+    "game": "Excitebike",
+    "description": "Values courtesy of https://guiguilegui.wordpress.com/2018/09/07/ai-learning-excitebike-using-xgboost/ https://datacrystal.romhacking.net/wiki/Excitebike:RAM_map",
+    "console": "NES",
+    "region": "NTSC",
+    "addresses": [
+        {
+            "name": "In Air",
+            "address": "0x00B0",
+            "description": "Describes if bike is in air or not",
+            "values": {
+                "0": "On Ground",
+                "2": "In Air"
+            }
+        },
+        {
+            "name": "Bike Angle",
+            "address": "0x00AC",
+            "description": "Describes angle bike is pointing"
+        },
+        {
+            "name": "Y Position",
+            "address": "0x008C",
+            "description": "Describes vertical of bike on-screen (lower is higher)"
+        },
+        {
+            "name": "Current Lane",
+            "address": "0x00B8",
+            "description": "Current lane of bike"
+        },
+        {
+            "name": "Velocity (Absolute)",
+            "address": "0x0090",
+            "description": "Change in position of bike on screen"
+        },
+        {
+            "name": "Velocity (Bike)",
+            "address": "0x0094",
+            "description": "Speed of bike on track",
+            "values": {
+                "0": "Stopped",
+                "1": "Slow",
+                "2": "Medium",
+                "3": "Fast"
+            }
+        },
+        {
+            "name": "Status Effect",
+            "address": "0x00F2",
+            "description": "Event currently effecting the status of the bike",
+            "values": {
+                "0": "No Effect",
+                "1": "Crashed",
+                "2": "Slowed",
+                "4": "Changing Lanes"
+            }
+        }
+    ]
+}
