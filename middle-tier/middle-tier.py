@@ -65,4 +65,8 @@ setup_all()
 ### Main Runtime ###
 if __name__ == "__main__":
     if args.demo:
+        logger.info("running demo")
         core.demo()
+    elif args.game: 
+        logger.info(f"running game {args.game}")
+        core.run(args.game)
