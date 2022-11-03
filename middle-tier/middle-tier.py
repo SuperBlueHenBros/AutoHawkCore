@@ -18,13 +18,18 @@ def setup_cli() -> argparse.Namespace:
                     prog = 'middle-tier',
                     description = 'Middle-tier for interfacing between bizhawk and our AI',
                     epilog = 'This project still needs a new name :)')
+
     parser.add_argument('-d', '--demo', action='store_true',
                     help="Test demo using the sample config") 
     parser.add_argument('-g', '--game',
                     help="Select a specific game config file to use")
+    parser.add_argument('-l', '--loop', action='store_true',
+                    help="Continously display the state of all addresses in console")
+
     parser.add_argument('-v', '--verbose',
                     action='store_true')
     parser.add_argument('-vv', '--very_verbose', action='store_true')
+    
     args = parser.parse_args()  
 
     if args.verbose:
@@ -65,8 +70,13 @@ setup_all()
 ### Main Runtime ###
 if __name__ == "__main__":
     if args.demo:
-        logger.info("running demo")
+        logger.info("Running demo")
         core.demo_sample()
     elif args.game: 
-        logger.info(f"running game {args.game}")
-        core.run(args.game)
+        logger.info(f"Running game {args.game}")
+        client = core.Core(args.game)
+        if args.loop:
+            client.loop()
+    if args.loop and not args.game:
+        logger.error("No game selected!")
+        
