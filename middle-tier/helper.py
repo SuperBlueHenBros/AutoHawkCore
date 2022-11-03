@@ -1,5 +1,5 @@
 ### Constants ###
-SEPERATOR_LENGTH = 60
+SEPERATOR_LENGTH = 80
 
 ### Helper Functions ###
 def seperator(line_length = SEPERATOR_LENGTH, title = ""):
