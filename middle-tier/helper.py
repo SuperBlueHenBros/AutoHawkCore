@@ -1,3 +1,5 @@
+import pathlib
+
 ### Constants ###
 SEPERATOR_LENGTH = 80
 
