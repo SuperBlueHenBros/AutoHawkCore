@@ -7,7 +7,7 @@ import tkinter.filedialog
 def get() -> configparser.ConfigParser:
     pass
 
-def check() -> None:
+def check() -> configparser.ConfigParser:
     config = configparser.ConfigParser()
     logger = logging.getLogger(__name__)   
 
@@ -46,5 +46,4 @@ def check() -> None:
         with open('config/middle-tier.ini', 'w') as configfile:
             config.write(configfile)
 
-        return 
-    
+    return config

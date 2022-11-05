@@ -9,10 +9,13 @@ def demo_sample():
     sample.info()
 
 class Core():
-    def __init__(self, game_path) -> None:
+    def __init__(self, game_path, config_info) -> None:
         # setup logging for class at the same level as root 
-        self.logger = logging.getLogger(__name__) 
+        self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.getLogger().getEffectiveLevel())
+
+        # save config info
+        self.config_info = config_info
 
         # load the currently supplied game data
         self.game = games.load(game_path)
