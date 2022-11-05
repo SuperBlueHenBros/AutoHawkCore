@@ -4,8 +4,10 @@ import logging
 import helper
 import tkinter.filedialog 
 
+def get() -> configparser.ConfigParser:
+    pass
 
-def check() -> configparser.ConfigParser:
+def check() -> None:
     config = configparser.ConfigParser()
     logger = logging.getLogger(__name__)   
 
@@ -44,5 +46,5 @@ def check() -> configparser.ConfigParser:
         with open('config/middle-tier.ini', 'w') as configfile:
             config.write(configfile)
 
-        return config
+        return 
     
