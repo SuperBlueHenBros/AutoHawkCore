@@ -1,3 +1,5 @@
+import pathlib
+
 ### Constants ###
 SEPERATOR_LENGTH = 80
 
@@ -18,3 +20,8 @@ def seperator(line_length = SEPERATOR_LENGTH, title = ""):
         for i in range(line_length_half):
             print('-', end="")
         print()
+
+def get_root_path() -> str:
+    # get location of project
+    root = pathlib.Path(__file__).parent.parent.as_posix()
+    return str(root)

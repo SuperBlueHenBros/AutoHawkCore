@@ -1,0 +1,38 @@
+{
+    "NES": {
+        "cores": {
+            "default": "QuickNes",
+            "all": [
+                "QuickNes",
+                "NesHawk",
+                "SubNESHawk"
+            ]
+        },
+        "domains": {
+            "default": "RAM",
+            "all": [
+                "RAM",
+                "WRAM",
+                "CHR",
+                "CIRAM (nametables)",
+                "PRG ROM",
+                "CHR VROM",
+                "PALRAM",
+                "OAM",
+                "System Bus"
+            ]
+        },
+        "buttons": [
+            "P1 A",
+            "P1 B",
+            "P1 Down",
+            "P1 Left",
+            "P1 Right",
+            "P1 Select",
+            "P1 Start",
+            "P1 Up",
+            "Power",
+            "Reset"
+        ]
+    }
+}
