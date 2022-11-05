@@ -41,7 +41,7 @@ def check() -> None:
             "data": dir_data,
             "bizhawk": dir_bizhawk,
         }
-
+        
         # create file
         with open('config/middle-tier.ini', 'w') as configfile:
             config.write(configfile)
