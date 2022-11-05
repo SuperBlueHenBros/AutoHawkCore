@@ -42,12 +42,15 @@ def setup_cli() -> argparse.Namespace:
     return args
 
 
+
 def setup_all():
     logger.info("Setting up")
 
-    config.check()
+    config_info = config.check()
 
     logger.info("Done setup")
+
+    return config_info
 
 
 
@@ -64,7 +67,8 @@ if __name__ == "__main__":
 
 
 ### Setup for CLI and Importing ###
-setup_all()
+conf = setup_all()
+
 
 
 ### Main Runtime ###
@@ -74,7 +78,7 @@ if __name__ == "__main__":
         core.demo_sample()
     elif args.game: 
         logger.info(f"Running game {args.game}")
-        client = core.Core(args.game)
+        client = core.Core(args.game, conf)
         if args.loop:
             client.loop()
     if args.loop and not args.game:

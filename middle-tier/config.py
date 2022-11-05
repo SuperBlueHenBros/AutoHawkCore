@@ -3,7 +3,7 @@ import logging
 from tkinter.filedialog import askopenfilename
 
 
-def check() -> None:
+def check() -> configparser.ConfigParser:
     config = configparser.ConfigParser()
     logger = logging.getLogger(__name__)    
 
@@ -28,4 +28,6 @@ def check() -> None:
         # creat file
         with open('config/middle-tier.ini', 'w') as configfile:
             config.write(configfile)
+
+    return config
     
