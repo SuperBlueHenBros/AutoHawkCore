@@ -42,6 +42,9 @@ def check() -> configparser.ConfigParser:
             "bizhawk": dir_bizhawk,
         }
         
+        # create the directory for the config file if it doesn't already exists
+        config_dir = root + '/config'
+        os.makedirs(config_dir, exist_ok=True)
         # create file
         with open('config/middle-tier.ini', 'w') as configfile:
             config.write(configfile)
