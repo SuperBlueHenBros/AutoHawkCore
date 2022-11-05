@@ -25,6 +25,8 @@ def setup_cli() -> argparse.Namespace:
                     help="Select a specific game config file to use")
     parser.add_argument('-l', '--loop', action='store_true',
                     help="Continously display the state of all addresses in console")
+    parser.add_argument('-m', '--manual', action='store_true',
+                    help="Don't automatically start bizhawk, let the user start it manually instead")
 
     parser.add_argument('-v', '--verbose',
                     action='store_true')
@@ -79,6 +81,8 @@ if __name__ == "__main__":
     elif args.game: 
         logger.info(f"Running game {args.game}")
         client = core.Core(args.game, conf)
+        if not args.manual:
+            client.spawn_emulator()
         if args.loop:
             client.loop()
     if args.loop and not args.game:

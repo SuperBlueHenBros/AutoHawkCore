@@ -1,6 +1,7 @@
 import games
 import connection
 import logging
+import subprocess
 import pprint
 
 # TODO: move demos to their own testing file
@@ -24,6 +25,13 @@ class Core():
 
         # connect to the BizHawk
         self.conn = connection.connect()
+
+    def spawn_emulator(self):
+        '''
+        Automatically open bizhawk with hook.lua running
+        '''
+        subprocess.run(self.config_info['directories']["bizhawk"])
+        # TODO: open ROM when that's added to the emulator
 
     def loop(self):
         '''
