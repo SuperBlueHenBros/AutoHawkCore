@@ -25,7 +25,9 @@ class Core():
         '''
         Automatically open bizhawk with hook.lua running
         '''
-        subprocess.run(self.config_info['directories']["bizhawk"])
+        bizhawk_path = self.config_info["directories"]["bizhawk"]
+        self.logger.debug(f"running bizhawk located at: {bizhawk_path}")
+        subprocess.run(bizhawk_path)
         # TODO: open ROM when that's added to the emulator
 
     def loop(self):
