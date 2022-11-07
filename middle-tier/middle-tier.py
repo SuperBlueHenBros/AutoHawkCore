@@ -88,7 +88,7 @@ if __name__ == "__main__":
             else: 
                 logger.info("Config file recreation denied")
 
-    if args.game: 
+    if args.game:
         logger.info(f"Running game {args.game}")
         client = core.Core(args.game, conf)
         if not args.manual:
