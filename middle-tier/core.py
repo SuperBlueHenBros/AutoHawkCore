@@ -4,11 +4,6 @@ import logging
 import subprocess
 import pprint
 
-# TODO: move demos to their own testing file
-def demo_sample():
-    sample = games.load("game-data/sample.json")
-    sample.info()
-
 class Core():
     def __init__(self, game_path, config_info) -> None:
         # setup logging for class at the same level as root 

@@ -75,10 +75,7 @@ conf = setup_all()
 
 ### Main Runtime ###
 if __name__ == "__main__":
-    if args.demo:
-        logger.info("Running demo")
-        core.demo_sample()
-    elif args.game: 
+    if args.game: 
         logger.info(f"Running game {args.game}")
         client = core.Core(args.game, conf)
         if not args.manual:
