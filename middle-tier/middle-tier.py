@@ -2,6 +2,7 @@ import argparse
 import logging
 from tkinter.filedialog import askopenfilename
 import config
+import helper
 import core
 
 
@@ -19,6 +20,8 @@ def setup_cli() -> argparse.Namespace:
                     description = 'Middle-tier for interfacing between bizhawk and our AI',
                     epilog = 'This project still needs a new name :)')
 
+    parser.add_argument('-c', '--config', action='store_true',
+                    help="Force running of first-time config setup") 
     parser.add_argument('-d', '--demo', action='store_true',
                     help="Test demo using the sample config") 
     parser.add_argument('-g', '--game',
@@ -75,6 +78,16 @@ conf = setup_all()
 
 ### Main Runtime ###
 if __name__ == "__main__":
+    if args.config:
+        logger.warning("Forcibly running config setup. This will delete any previously written configuration!")
+        # prompt unless running silently
+        if logger.level < logging.ERROR:
+            confirmation = helper.get_user_confirmation(prompt="Are you sure you want to reset your configuraton? (Y/n)\n")
+            if confirmation:
+                config.create()
+            else: 
+                logger.info("Config file recreation denied")
+
     if args.game: 
         logger.info(f"Running game {args.game}")
         client = core.Core(args.game, conf)
@@ -82,6 +95,7 @@ if __name__ == "__main__":
             client.spawn_emulator()
         if args.loop:
             client.loop()
+
     if args.loop and not args.game:
         logger.error("No game selected!")
         

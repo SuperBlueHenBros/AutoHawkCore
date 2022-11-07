@@ -25,3 +25,16 @@ def get_root_path() -> str:
     # get location of project
     root = pathlib.Path(__file__).parent.parent.as_posix()
     return str(root)
+
+def get_user_confirmation(prompt: str="Are you sure you want to continue?") -> bool:
+    answer = None
+
+    while answer == None:
+        confirm = input(prompt)
+        confirm = confirm.lower()
+        if confirm == "y" or confirm == "yes":
+            answer = True
+        elif confirm == "n" or confirm == "no":
+            answer = False
+        
+    return answer

@@ -9,8 +9,6 @@ def check() -> configparser.ConfigParser:
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.getLogger().getEffectiveLevel()) 
 
-    root = helper.get_root_path()
-
     dir_data = get_data_dir()
     if not os.path.exists(dir_data):
         print("Where is your game data located?")
@@ -28,37 +26,50 @@ def check() -> configparser.ConfigParser:
 
     # create config file if it doesn't
     else:
-        logging.warning("No config found, setting up...")
-        
-        # get bizhawk excecutable for when running manually
-        print("Where is the bizhawk excecutable?")
-        dir_bizhawk = tkinter.filedialog.askopenfilename(title="Where is your bizhawk excecutable?") 
-        logger.debug(f"Given bizhawk path: {dir_bizhawk}")
-
-        # get hook.lua path for automatically running with bizhawk
-        dir_hook = get_hook_file()
-
-        if not os.path.isfile(dir_hook):
-            print("Where is your hook.lua (Did you run the setup script?)")
-            dir_hook = tkinter.filedialog.askopenfilename(initialdir=root, title="Where is your hook.lua?")
-            logger.debug(f"Given lua hook path: {dir_hook}")
-
-        config['directories'] = {
-            "data": dir_data,
-            "hook": dir_hook,
-            "bizhawk": dir_bizhawk,
-        }
-        
-        # create the directory for the config file if it doesn't already exists
-        dir_config = get_config_dir()
-        os.makedirs(dir_config, exist_ok=True)
-    
-        # create config file
-        with open(dir_config_file, 'w') as configfile:
-            config.write(configfile)
+        config = create()
 
     return config
 
+def create():
+    config = configparser.ConfigParser()
+    # initialize logger
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.getLogger().getEffectiveLevel()) 
+    logger.warning("No config found, setting up...")
+
+    root = helper.get_root_path()
+
+    dir_data = get_data_dir()
+    dir_config_file = get_config_file()
+
+    # get bizhawk excecutable for when running manually
+    print("Where is the bizhawk excecutable?")
+    dir_bizhawk = tkinter.filedialog.askopenfilename(title="Where is your bizhawk excecutable?") 
+    logger.debug(f"Given bizhawk path: {dir_bizhawk}")
+
+    # get hook.lua path for automatically running with bizhawk
+    dir_hook = get_hook_file()
+
+    if not os.path.isfile(dir_hook):
+        print("Where is your hook.lua (Did you run the setup script?)")
+        dir_hook = tkinter.filedialog.askopenfilename(initialdir=root, title="Where is your hook.lua?")
+        logger.debug(f"Given lua hook path: {dir_hook}")
+
+    config['directories'] = {
+        "data": dir_data,
+        "hook": dir_hook,
+        "bizhawk": dir_bizhawk,
+    }
+    
+    # create the directory for the config file if it doesn't already exists
+    dir_config = get_config_dir()
+    os.makedirs(dir_config, exist_ok=True)
+
+    # create config file
+    with open(dir_config_file, 'w') as configfile:
+        config.write(configfile)
+
+    return config
 
 ### Path Functions ###
 # consolidate every reoccuring path into a function
