@@ -20,6 +20,7 @@ def setup_cli() -> argparse.Namespace:
                     description = 'Middle-tier for interfacing between bizhawk and our AI',
                     epilog = 'This project still needs a new name :)')
 
+
     parser.add_argument('-c', '--config', action='store_true',
                     help="Force running of first-time config setup") 
     parser.add_argument('-d', '--demo', action='store_true',
@@ -30,6 +31,9 @@ def setup_cli() -> argparse.Namespace:
                     help="Continously display the state of all addresses in console")
     parser.add_argument('-m', '--manual', action='store_true',
                     help="Don't automatically start bizhawk, let the user start it manually instead")
+    parser.add_argument('-r', '--rom',
+                    help="Specify the path to the file you'll be opening")
+
 
     parser.add_argument('-v', '--verbose',
                     action='store_true')
@@ -90,7 +94,9 @@ if __name__ == "__main__":
 
     if args.game:
         logger.info(f"Running game {args.game}")
-        client = core.Core(args.game, conf)
+
+        client = core.Core(args.game, conf, rom_path=args.rom)
+
         if not args.manual:
             client.spawn_emulator()
         if args.loop:
