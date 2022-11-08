@@ -43,7 +43,7 @@ class Core():
         self.logger.info(f"Running: {bizhawk_path} {command_args}")
         subprocess.Popen([bizhawk_path, self.rom_path, command_args])
 
-        self.logger.info("waiting for emulator to initialize")
+        self.logger.info("Waiting for emulator to initialize")
         time.sleep(6)
         
         # TODO: open ROM when that's added to the emulator
