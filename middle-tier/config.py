@@ -55,8 +55,17 @@ def create():
         dir_hook = tkinter.filedialog.askopenfilename(initialdir=root, title="Where is your hook.lua?")
         logger.debug(f"Given lua hook path: {dir_hook}")
 
+    # get the consoles.json path (I don't see why it would ever move, but here's to redudency)
+    dir_consoles = get_consoles_file()
+
+    if not os.path.isfile(dir_consoles):
+        print("Where is your consoles.json? (it should already exist)")
+        dir_consoles = tkinter.filedialog.askopenfilename(initialdir=root, title="Where is your consoles.json?")
+        logger.debug(f"Given consoles.json path: {dir_hook}")
+
     config['directories'] = {
         "data": dir_data,
+        "consoles": dir_consoles,
         "hook": dir_hook,
         "bizhawk": dir_bizhawk,
     }
@@ -87,3 +96,6 @@ def get_lua_dir() -> str:
 
 def get_hook_file() -> str:
     return get_lua_dir() + '/hook.lua'
+
+def get_consoles_file() -> str:
+    return get_data_dir() + '/consoles.json'

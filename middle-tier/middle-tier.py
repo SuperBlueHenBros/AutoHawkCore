@@ -33,7 +33,9 @@ def setup_cli() -> argparse.Namespace:
                     help="Don't automatically start bizhawk, let the user start it manually instead")
     parser.add_argument('-r', '--rom',
                     help="Specify the path to the file you'll be opening")
-
+    parser.add_argument('-p', '--play',
+                    help="Play the game yourself!")
+                    
 
     parser.add_argument('-v', '--verbose',
                     action='store_true')
@@ -100,7 +102,7 @@ if __name__ == "__main__":
         if not args.manual:
             client.spawn_emulator()
         if args.loop:
-            client.loop()
+            client.loop(play=True)
 
     if args.loop and not args.game:
         logger.error("No game selected!")

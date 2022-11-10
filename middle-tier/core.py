@@ -1,13 +1,28 @@
 import games
 import connection
+import consoles
+
 import logging
 import subprocess
 import pprint
 import time
 import tkinter.filedialog 
+import pynput
+import configparser
+
+# note: this just exists for a demo, should be deleted after it's been shown working
+key_translator = {
+    pynput.keyboard.Key.left: "P1 Left",
+    pynput.keyboard.Key.right: "P1 Right",
+    pynput.keyboard.Key.up: "P1 Up",
+    pynput.keyboard.Key.down: "P1 Down",
+    pynput.keyboard.Key.enter: "P1 Start",
+    pynput.keyboard.KeyCode.from_char('z'): "P1 A",
+    pynput.keyboard.KeyCode.from_char('x'): "P1 B"
+}
 
 class Core():
-    def __init__(self, game_path, config_info, rom_path=None) -> None:
+    def __init__(self, game_path: str, config_info: configparser.ConfigParser, rom_path=None) -> None:
         # setup logging for class at the same level as root 
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.getLogger().getEffectiveLevel())
@@ -19,6 +34,12 @@ class Core():
         self.game = games.load(game_path)
         if self.logger.level <= logging.INFO:
             self.game.info()
+
+        # load the console data for the given game
+        console_path = config_info["directories"]["consoles"]
+        self.console = consoles.load(console_path, self.game.console)
+        if self.logger.level <= logging.INFO:
+            self.console.info()
 
         if not rom_path:
             rom_path = tkinter.filedialog.askopenfilename(title="Where is your game ROM located") 
@@ -48,11 +69,25 @@ class Core():
         
         # TODO: open ROM when that's added to the emulator
 
-    def loop(self):
+    def send_input(self, keypress):
+        if keypress in key_translator:
+            key_translated = key_translator[keypress]
+            state = self.console.buttons.press(key_translated)
+            self.logger.debug(f"pressed key: {keypress}/{key_translated} (state: {state})")
+            self.conn.send_input(key_name=key_translated, key_state=state)
+        else:
+            self.logger.debug(f"{keypress} is not a valid button (type: {type(keypress)}")
+
+    def loop(self, play=False):
         '''
         Continually poll the emulator for memory information
         '''
         self.logger.info(self.game.addresses)
+
+        if play:
+            # keyboard listener test
+            listener = pynput.keyboard.Listener(on_press=self.send_input)
+            listener.start()  # start to listen on a separate thread
         
         # create a local map of all addresses to read
         game_state = {}
