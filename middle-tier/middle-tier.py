@@ -100,7 +100,7 @@ if __name__ == "__main__":
         client = core.Core(args.game, conf, rom_path=args.rom)
 
         if not args.manual:
-            client.spawn_emulator()
+            client.spawn_emulator(startup_delay=6)
         if args.loop:
             client.loop(play=True)
 

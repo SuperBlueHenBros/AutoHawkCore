@@ -1,5 +1,4 @@
 import games
-import connection
 import consoles
 
 import logging
@@ -9,6 +8,7 @@ import time
 import tkinter.filedialog 
 import pynput
 import configparser
+import bizhook
 
 # note: this just exists for a demo, should be deleted after it's been shown working
 key_translator = {
@@ -22,7 +22,8 @@ key_translator = {
 }
 
 class Core():
-    def __init__(self, game_path: str, config_info: configparser.ConfigParser, rom_path=None) -> None:
+    def __init__(self, game_path: str, config_info: configparser.ConfigParser, 
+                rom_path=None) -> None:
         # setup logging for class at the same level as root 
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.getLogger().getEffectiveLevel())
@@ -46,9 +47,9 @@ class Core():
         self.rom_path = rom_path
 
         # connect to the BizHawk
-        self.conn = connection.connect()
+        self.conn = self.connect()
 
-    def spawn_emulator(self):
+    def spawn_emulator(self, startup_delay: int = 6):
         '''
         Automatically open bizhawk with hook.lua running
         '''
@@ -65,7 +66,7 @@ class Core():
         subprocess.Popen([bizhawk_path, self.rom_path, command_args])
 
         self.logger.info("Waiting for emulator to initialize")
-        time.sleep(6)
+        time.sleep(startup_delay)
 
     def send_input(self, keypress):
         if keypress in key_translator:
@@ -76,14 +77,22 @@ class Core():
         else:
             self.logger.debug(f"{keypress} is not a valid button (type: {type(keypress)}")
 
-    def loop(self, play=False):
+    def connect(self):
+        ### Connection Setup ###
+        self.logger.info("Creating connection...")
+        connection = bizhook.memory.Memory("RAM")
+        self.logger.info("Connection created!")
+        return connection
+
+
+    def loop(self, play: bool = False):
         '''
         Continually poll the emulator for memory information
         '''
         self.logger.info(self.game.addresses)
 
         if play:
-            # keyboard listener test
+            # keyboard listener for testing
             listener = pynput.keyboard.Listener(on_press=self.send_input)
             listener.start()  # start to listen on a separate thread
         
