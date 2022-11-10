@@ -34,7 +34,7 @@ def setup_cli() -> argparse.Namespace:
     parser.add_argument('-r', '--rom',
                     help="Specify the path to the file you'll be opening")
     parser.add_argument('-p', '--play',
-                    help="Play the game yourself!")
+                    help="(Warning: Buggy) Play the game yourself!")
                     
 
     parser.add_argument('-v', '--verbose',

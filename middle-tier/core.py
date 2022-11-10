@@ -66,8 +66,6 @@ class Core():
 
         self.logger.info("Waiting for emulator to initialize")
         time.sleep(6)
-        
-        # TODO: open ROM when that's added to the emulator
 
     def send_input(self, keypress):
         if keypress in key_translator:
