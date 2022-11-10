@@ -1,15 +1,13 @@
 import argparse
 import logging
-from tkinter.filedialog import askopenfilename
 import config
 import helper
 import core
 
-
-
-### Core Functions ###
-def load_file() -> dict:
-    filename = askopenfilename()
+# Depending on your machine bizhawk may start too fast or slow
+# This is fine but can cause errors as bizhawk might not be connectable
+# If you want to decrease any socket errors on startup, increase this timer
+STARTUP_DELAY = 6 # Seconds
 
 
 
@@ -54,6 +52,7 @@ def setup_cli() -> argparse.Namespace:
 
 
 
+### Pull Setup Info ###
 def setup_all():
     logger.info("Setting up")
 
@@ -100,7 +99,7 @@ if __name__ == "__main__":
         client = core.Core(args.game, conf, rom_path=args.rom)
 
         if not args.manual:
-            client.spawn_emulator(startup_delay=6)
+            client.spawn_emulator(startup_delay=STARTUP_DELAY)
         if args.loop:
             client.loop(play=args.play)
 
