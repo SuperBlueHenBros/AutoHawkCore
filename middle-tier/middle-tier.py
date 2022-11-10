@@ -102,7 +102,7 @@ if __name__ == "__main__":
         if not args.manual:
             client.spawn_emulator(startup_delay=6)
         if args.loop:
-            client.loop(play=True)
+            client.loop(play=args.play)
 
     if args.loop and not args.game:
         logger.error("No game selected!")

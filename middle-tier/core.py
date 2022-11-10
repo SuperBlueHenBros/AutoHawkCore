@@ -68,7 +68,24 @@ class Core():
         self.logger.info("Waiting for emulator to initialize")
         time.sleep(startup_delay)
 
-    def send_input(self, keypress):
+    def send_input(self, button: str):
+        '''
+        Send a given button to bizhawk.
+        '''
+        if button in self.console.buttons.map:
+            state = self.console.buttons.press(button)
+            self.conn.send_input(key_name=button, key_state=state)
+        else:
+            self.logger.error(f"Invalid button provided: {button}")
+            self.logger.warning("Make sure you have the right console selected and the buttons are correct")
+
+
+    def send_input_keyboard(self, keypress):
+        '''
+        Send a given pynput key to bizhawk.
+
+        For testing usage only, use send_input when using as an API
+        '''
         if keypress in key_translator:
             key_translated = key_translator[keypress]
             state = self.console.buttons.press(key_translated)
@@ -78,7 +95,9 @@ class Core():
             self.logger.debug(f"{keypress} is not a valid button (type: {type(keypress)}")
 
     def connect(self):
-        ### Connection Setup ###
+        '''
+        Create instance of connection to bizhawk API
+        '''
         self.logger.info("Creating connection...")
         connection = bizhook.memory.Memory("RAM")
         self.logger.info("Connection created!")
@@ -93,7 +112,7 @@ class Core():
 
         if play:
             # keyboard listener for testing
-            listener = pynput.keyboard.Listener(on_press=self.send_input)
+            listener = pynput.keyboard.Listener(on_press=self.send_input_keyboard)
             listener.start()  # start to listen on a separate thread
         
         # create a local map of all addresses to read
