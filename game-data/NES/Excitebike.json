@@ -54,6 +54,26 @@
                 "2": "Slowed",
                 "4": "Changing Lanes"
             }
+        },
+        {
+            "name": "Course Map 0",
+            "address": "0x03C0",
+            "description": "First closest object to bike"
+        },
+        {
+            "name": "Course Map 1",
+            "address": "0x03C1",
+            "description": "Second closest object to bike"
+        },
+        {
+            "name": "Course Map 2",
+            "address": "0x03C2",
+            "description": "Third closest objects to bike"
+        },
+        {
+            "name": "Course Map 3",
+            "address": "0x03C3",
+            "description": "Fourth closest objects to bike"
         }
     ]
 }
