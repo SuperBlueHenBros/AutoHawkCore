@@ -35,9 +35,12 @@ def setup_cli() -> argparse.Namespace:
                     help="Specify the path to the file you'll be opening")
                     
 
-    parser.add_argument('-q', '--quiet', action='store_true')
-    parser.add_argument('-v', '--verbose', action='store_true')
-    parser.add_argument('-vv', '--very_verbose', action='store_true')
+    parser.add_argument('-q', '--quiet', action='store_true',
+                        help="Only log errors to stdout")
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help="Log extra info to stdout")
+    parser.add_argument('-vv', '--very_verbose', action='store_true',
+                        help="Log all debug info to stdout")
     
     args = parser.parse_args()  
 
