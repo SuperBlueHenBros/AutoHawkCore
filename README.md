@@ -59,10 +59,10 @@ options:
 
 ##### Continously poll for memory output
 ```
-python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (E) [!].nes" --loop
+python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (JU) [!].nes" --loop
 ```
 
 ##### Play the game via CLI
 ```
-python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (E) [!].nes" --loop --play
+python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (JU) [!].nes" --loop --play
 ```
