@@ -6,6 +6,7 @@ The main interface of the program's components. Used to communicate between our 
 
 ## Dependencies
 Python >=3.9
+
 Bizhawk
 
 ## Usage
