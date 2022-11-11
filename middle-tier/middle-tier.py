@@ -29,18 +29,20 @@ def setup_cli() -> argparse.Namespace:
                     help="Continously display the state of all addresses in console")
     parser.add_argument('-m', '--manual', action='store_true',
                     help="Don't automatically start bizhawk, let the user start it manually instead")
-    parser.add_argument('-r', '--rom',
-                    help="Specify the path to the file you'll be opening")
     parser.add_argument('-p', '--play', action='store_true',
                     help="(Warning: Buggy) Play the game yourself!")
+    parser.add_argument('-r', '--rom',
+                    help="Specify the path to the file you'll be opening")
                     
 
-    parser.add_argument('-v', '--verbose',
-                    action='store_true')
+    parser.add_argument('-q', '--quiet', action='store_true')
+    parser.add_argument('-v', '--verbose', action='store_true')
     parser.add_argument('-vv', '--very_verbose', action='store_true')
     
     args = parser.parse_args()  
 
+    if args.quiet:
+        logger.setLevel(logging.ERROR)
     if args.verbose:
         logger.setLevel(logging.INFO)
     elif args.very_verbose: 
