@@ -31,7 +31,7 @@ def setup_cli() -> argparse.Namespace:
                     help="Don't automatically start bizhawk, let the user start it manually instead")
     parser.add_argument('-r', '--rom',
                     help="Specify the path to the file you'll be opening")
-    parser.add_argument('-p', '--play',
+    parser.add_argument('-p', '--play', action='store_true',
                     help="(Warning: Buggy) Play the game yourself!")
                     
 
