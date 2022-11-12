@@ -34,7 +34,7 @@ If you don't see a (env) in your terminal session you are not in the virtual env
 
 #### Excecution
 
-When inside the virtual enviroment, run `python middle-tier/middle-tier.py`. You typically shouldn't ever be running any of the other files. 
+When inside the virtual enviroment, run `python.exe middle-tier/middle-tier.py`. You typically shouldn't ever be running any of the other files. 
 This will probably be updated to use a new structure.
 
 #### Args
