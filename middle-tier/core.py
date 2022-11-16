@@ -125,6 +125,7 @@ class Core():
         self.logger.info("Looping over memory values")
         # Read bytes from the socket until the script is killed
         while True:
+            self.conn.advance_frame()
             for addr in self.game.addresses:
                 try:
                     read_val = self.conn.read_byte(addr)
