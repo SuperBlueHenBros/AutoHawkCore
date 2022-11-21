@@ -1,6 +1,6 @@
 import json
 import logging
-import helper
+import middletier.helper as helper
 
 
 class Game():

@@ -1,5 +1,5 @@
-import games
-import consoles
+import middletier.games as games
+import middletier.consoles as consoles
 
 import logging
 import subprocess

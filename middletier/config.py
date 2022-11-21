@@ -1,7 +1,7 @@
 import configparser
 import os
 import logging
-import helper
+import middletier.helper as helper
 import tkinter.filedialog 
 
 def check() -> configparser.ConfigParser:

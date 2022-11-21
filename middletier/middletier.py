@@ -1,6 +1,7 @@
+import middletier.config as config
+
 import argparse
 import logging
-import config
 import helper
 import core
 
