@@ -58,7 +58,24 @@
         {
             "name": "Course Map 0",
             "address": "0x03C0",
-            "description": "First closest object to bike"
+            "description": "First closest object to bike",
+            "values": {
+                "42": "Ramp Top (Short)",
+                "59": "Nothing ahead",
+                "61": "Nothing ahead",
+                "80": "Hill Closest (Tall)",
+                "86": "Hill Closest (Short)",
+                "112": "Mud Closest",
+                "185": "Mud Middle",
+                "188": "Mud Farthest",
+                "136": "Front of the boost",
+                "137": "Back of the boost",
+                "143": "Ramp bottom",
+                "203": "Donwhill Ramp Highest",
+                "201": "Downhill Ramp Mid",
+                "200": "Downhill Ramo Lowest",
+                "254": "Ramp Near Top"
+            }
         },
         {
             "name": "Course Map 1",
