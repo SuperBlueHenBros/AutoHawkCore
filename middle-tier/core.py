@@ -123,9 +123,11 @@ class Core():
         self.logger.debug(f"Core:loop: initial game_state{game_state}")
 
         self.logger.info("Looping over memory values")
+        printing_minimizer = 0
+        print_reset = 10
         # Read bytes from the socket until the script is killed
         while True:
-            self.conn.advance_frame()
+            self.conn.advance_frame(frames=6)
             for addr in self.game.addresses:
                 try:
                     read_val = self.conn.read_byte(addr)
@@ -136,6 +138,11 @@ class Core():
                     logging.debug("SOCKET ACCESS ERROR")
                     continue
 
-            pprint.pprint(game_state)
+            if printing_minimizer > print_reset:
+                self.game.display_game_status(game_state)
+                printing_minimizer = 0
+            else: 
+                printing_minimizer += 1
+            
+            # pprint.pprint(game_state)
 
-    
