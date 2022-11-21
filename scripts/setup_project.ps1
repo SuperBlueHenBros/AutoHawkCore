@@ -19,6 +19,10 @@ Write-Host -ForegroundColor Yellow "Cloning the lua hook for bizhawk"
 # get the latest lua-components
 git clone https://github.com/SuperBlueHenBros/lua-components.git lib\lua-components
 
+Write-Host -ForegroundColor Yellow "Installing any dependencies"
+# install pynput for using keyboard input
+python.exe -m pip install pynput
+
 Write-Host -ForegroundColor Yellow "Installing middletier as a module with pip"
 # install middle-tier with pip
-python.exe -m pip install -e .\middletier
+python.exe -m pip install -e .

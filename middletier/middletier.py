@@ -1,9 +1,10 @@
 import middletier.config as config
+import middletier.helper as helper
+import middletier.core as core
 
 import argparse
 import logging
-import helper
-import core
+
 
 # Depending on your machine bizhawk may start too fast or slow
 # This is fine but can cause errors as bizhawk might not be connectable
