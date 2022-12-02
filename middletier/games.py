@@ -19,6 +19,7 @@ class Game():
             self.name = raw_info['game']
             self.console = raw_info['console']
             self.mapping = raw_info['addresses']
+            self.state_path = self.console + '/' + raw_info['states']['all'][raw_info['states']['default']]
 
         except IndexError as e:
             self.logger.error('Required field missing from game file')

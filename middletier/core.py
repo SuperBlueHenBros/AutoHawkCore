@@ -49,24 +49,33 @@ class Core():
         # connect to the BizHawk
         self.conn = self.connect()
 
-    def spawn_emulator(self, startup_delay: int = 6):
+    def spawn_emulator(self, startup_delay: int = 6, load_state: bool = False):
         '''
         Automatically open bizhawk with hook.lua running
         '''
         bizhawk_path = self.config_info["directories"]["bizhawk"]
         self.logger.debug(f"Running bizhawk located at: {bizhawk_path}")
 
-        self.logger.debug(f"Using ROM located at: {self.rom_path}")
+        rom_path = self.rom_path
+        self.logger.debug(f"Using ROM located at: {rom_path}")
 
         hook_path = self.config_info["directories"]["hook"]
         self.logger.debug(f"Using hook.lua located at: {hook_path}")
 
-        command_args = "--lua=" + hook_path
-        self.logger.info(f"Running: {bizhawk_path} {command_args}")
-        subprocess.Popen([bizhawk_path, self.rom_path, command_args])
+        lua_arg = "--lua=" + hook_path
+        if load_state:
+            self.state_path = self.config_info["directories"]["data"] + "/" + self.game.state_path
+            self.logger.debug(f"save_path: {self.state_path}")
+            state_arg = "--load-state=" + self.state_path
+            self.logger.info(f"Running: {bizhawk_path} {rom_path} {lua_arg} {state_arg}")
+            biz_response = subprocess.Popen([bizhawk_path, rom_path, lua_arg, state_arg], shell=True, stdout=subprocess.PIPE)
+        else:
+            self.logger.info(f"Running: {bizhawk_path} {rom_path} {lua_arg}")
+            biz_response = subprocess.Popen([bizhawk_path, rom_path, lua_arg], shell=True, stdout=subprocess.PIPE)
 
         self.logger.info("Waiting for emulator to initialize")
         time.sleep(startup_delay)
+        self.logger.debug(f"args: {biz_response.args}")
 
     def send_input(self, button: str):
         '''

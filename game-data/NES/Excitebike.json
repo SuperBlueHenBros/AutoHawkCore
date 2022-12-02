@@ -3,6 +3,12 @@
     "description": "Values courtesy of https://guiguilegui.wordpress.com/2018/09/07/ai-learning-excitebike-using-xgboost/ https://datacrystal.romhacking.net/wiki/Excitebike:RAM_map",
     "console": "NES",
     "region": "NTSC",
+    "states": {
+        "default": "gate_drop",
+        "all": {
+            "gate_drop": "states/Excitebike.State"
+        }
+    },
     "addresses": [
         {
             "name": "In Air",
