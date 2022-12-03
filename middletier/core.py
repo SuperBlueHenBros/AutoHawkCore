@@ -77,13 +77,16 @@ class Core():
         time.sleep(startup_delay)
         self.logger.debug(f"args: {biz_response.args}")
 
-    def send_input(self, button: str):
+    def send_input(self, button: str, state: bool = None):
         '''
         Send a given button to bizhawk.
         '''
         if button in self.console.buttons.map:
-            state = self.console.buttons.press(button)
-            self.conn.send_input(key_name=button, key_state=state)
+            if state:
+                self.conn.send_input(key_name=button, key_state=state)
+            else:
+                state = self.console.buttons.press(button)
+                self.conn.send_input(key_name=button, key_state=state)
         else:
             self.logger.error(f"Invalid button provided: {button}")
             self.logger.warning("Make sure you have the right console selected and the buttons are correct")
