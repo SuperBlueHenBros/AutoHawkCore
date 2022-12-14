@@ -5,6 +5,7 @@
 The main interface of the program's components. Used to communicate between our AI and bizhawk. 
 
 ## Dependencies
+
 Python >=3.9
 
 Bizhawk
@@ -29,12 +30,12 @@ If something something seems to be acting up, you can reset installed dependenci
 
 #### Enviroment
 
-Make sure you are inside the virtual enviroment when running the program. To access it after the initial setup run `\env\Scripts\activate`. 
+Make sure you are inside the virtual enviroment when running the program. To access it after the initial setup run `.\env\Scripts\activate`. 
 If you don't see a (env) in your terminal session you are not in the virtual enviroment.
 
 #### Excecution
 
-When inside the virtual enviroment, run `python.exe middle-tier/middle-tier.py`. You typically shouldn't ever be running any of the other files. 
+When inside the virtual enviroment, run `python.exe middle-tier\middle-tier.py`. You typically shouldn't ever be running any of the other files. 
 This will probably be updated to use a new structure.
 
 #### Args
