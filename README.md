@@ -1,8 +1,9 @@
-# Middle-Tier
+# AutoHawkCore 
 
 ## Description 
 
-The main interface of the program's components. Used to communicate between our AI and bizhawk. 
+The main intermediary library between our AI and Bizhawk. Simplifies, abstracts, and automates running AutoHawkAPI. 
+Designed with modularity in mind to easily add more games without the need for any programming.
 
 ## Dependencies
 
@@ -67,3 +68,16 @@ python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json"
 ```
 python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (JU) [!].nes" --loop --play
 ```
+
+##### Using as Library
+
+TODO
+
+#### Adding Games
+
+All game information is stored in their relevant console folders under `game-data/`
+
+An example file for adding a game is availible under `game-data/sample.json`
+
+All console information is stored under `game-data/consoles.json`
+
