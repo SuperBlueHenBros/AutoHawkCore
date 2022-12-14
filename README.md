@@ -34,7 +34,7 @@ If you don't see a (env) in your terminal session you are not in the virtual env
 
 #### Excecution
 
-When inside the virtual enviroment, run `python middle-tier/middle-tier.py`. You typically shouldn't ever be running any of the other files. 
+When inside the virtual enviroment, run `python.exe middle-tier/middle-tier.py`. You typically shouldn't ever be running any of the other files. 
 This will probably be updated to use a new structure.
 
 #### Args
@@ -58,7 +58,11 @@ options:
 #### Examples
 
 ##### Continously poll for memory output
-`python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (E) [!].nes" --loop`
+```
+python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (JU) [!].nes" --loop
+```
 
 ##### Play the game via CLI
-`python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (E) [!].nes" --loop --play`
+```
+python.exe .\middle-tier\middle-tier.py --game ".\game-data\NES\Excitebike.json" --rom "[YOUR PATH TO ROMS GOES HERE]\Excitebike (JU) [!].nes" --loop --play
+```

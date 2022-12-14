@@ -1,5 +1,5 @@
-import games
-import consoles
+import middletier.games as games
+import middletier.consoles as consoles
 
 import logging
 import subprocess
@@ -49,32 +49,44 @@ class Core():
         # connect to the BizHawk
         self.conn = self.connect()
 
-    def spawn_emulator(self, startup_delay: int = 6):
+    def spawn_emulator(self, startup_delay: int = 6, load_state: bool = False):
         '''
         Automatically open bizhawk with hook.lua running
         '''
         bizhawk_path = self.config_info["directories"]["bizhawk"]
         self.logger.debug(f"Running bizhawk located at: {bizhawk_path}")
 
-        self.logger.debug(f"Using ROM located at: {self.rom_path}")
+        rom_path = self.rom_path
+        self.logger.debug(f"Using ROM located at: {rom_path}")
 
         hook_path = self.config_info["directories"]["hook"]
         self.logger.debug(f"Using hook.lua located at: {hook_path}")
 
-        command_args = "--lua=" + hook_path
-        self.logger.info(f"Running: {bizhawk_path} {command_args}")
-        subprocess.Popen([bizhawk_path, self.rom_path, command_args])
+        lua_arg = "--lua=" + hook_path
+        if load_state:
+            self.state_path = self.config_info["directories"]["data"] + "/" + self.game.state_path
+            self.logger.debug(f"save_path: {self.state_path}")
+            state_arg = "--load-state=" + self.state_path
+            self.logger.info(f"Running: {bizhawk_path} {rom_path} {lua_arg} {state_arg}")
+            biz_response = subprocess.Popen([bizhawk_path, rom_path, lua_arg, state_arg], shell=True, stdout=subprocess.PIPE)
+        else:
+            self.logger.info(f"Running: {bizhawk_path} {rom_path} {lua_arg}")
+            biz_response = subprocess.Popen([bizhawk_path, rom_path, lua_arg], shell=True, stdout=subprocess.PIPE)
 
         self.logger.info("Waiting for emulator to initialize")
         time.sleep(startup_delay)
+        self.logger.debug(f"args: {biz_response.args}")
 
-    def send_input(self, button: str):
+    def send_input(self, button: str, state: bool = None):
         '''
         Send a given button to bizhawk.
         '''
         if button in self.console.buttons.map:
-            state = self.console.buttons.press(button)
-            self.conn.send_input(key_name=button, key_state=state)
+            if state:
+                self.conn.send_input(key_name=button, key_state=state)
+            else:
+                state = self.console.buttons.press(button)
+                self.conn.send_input(key_name=button, key_state=state)
         else:
             self.logger.error(f"Invalid button provided: {button}")
             self.logger.warning("Make sure you have the right console selected and the buttons are correct")
@@ -123,8 +135,11 @@ class Core():
         self.logger.debug(f"Core:loop: initial game_state{game_state}")
 
         self.logger.info("Looping over memory values")
+        printing_minimizer = 0
+        print_reset = 10
         # Read bytes from the socket until the script is killed
         while True:
+            self.conn.advance_frame(frames=6)
             for addr in self.game.addresses:
                 try:
                     read_val = self.conn.read_byte(addr)
@@ -135,6 +150,11 @@ class Core():
                     logging.debug("SOCKET ACCESS ERROR")
                     continue
 
-            pprint.pprint(game_state)
+            if printing_minimizer > print_reset:
+                self.game.display_game_status(game_state)
+                printing_minimizer = 0
+            else: 
+                printing_minimizer += 1
+            
+            # pprint.pprint(game_state)
 
-    

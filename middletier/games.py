@@ -1,6 +1,6 @@
 import json
 import logging
-import helper
+import middletier.helper as helper
 
 
 class Game():
@@ -11,6 +11,7 @@ class Game():
 
         self.read(raw_info)
         self.addresses = self.get_addresses(self.mapping)
+        self.status_map = self.create_status_map(self.mapping)
 
     def read(self, raw_info: dict) -> None:
         # create relevant variables from provided game file json
@@ -18,6 +19,7 @@ class Game():
             self.name = raw_info['game']
             self.console = raw_info['console']
             self.mapping = raw_info['addresses']
+            self.state_path = self.console + '/' + raw_info['states']['all'][raw_info['states']['default']]
 
         except IndexError as e:
             self.logger.error('Required field missing from game file')
@@ -39,7 +41,21 @@ class Game():
         print("Console:", self.console)
         print("Addresses:", [hex(addr) for addr in self.addresses])
         helper.seperator()
+
+    def create_status_map(self, map):
+        status = {}
+        for add_info in map:
+            status[int(add_info['address'], 16)] = add_info['name']
+
+        return status
         
+    def display_game_status(self, game_state: dict):
+        self.logger.info("displaying game status")
+        game_status = ""
+        for addr in game_state:
+            game_status += f"{self.status_map[addr]}: {game_state[addr]}\n"
+        self.logger.info(game_status)
+            
 
 def load(path: str) -> Game:
     # load a single game

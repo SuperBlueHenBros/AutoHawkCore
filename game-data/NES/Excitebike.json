@@ -3,6 +3,12 @@
     "description": "Values courtesy of https://guiguilegui.wordpress.com/2018/09/07/ai-learning-excitebike-using-xgboost/ https://datacrystal.romhacking.net/wiki/Excitebike:RAM_map",
     "console": "NES",
     "region": "NTSC",
+    "states": {
+        "default": "gate_drop",
+        "all": {
+            "gate_drop": "states/Excitebike.State"
+        }
+    },
     "addresses": [
         {
             "name": "In Air",
@@ -16,7 +22,13 @@
         {
             "name": "Bike Angle",
             "address": "0x00AC",
-            "description": "Describes angle bike is pointing"
+            "description": "Describes angle bike is pointing",
+            "value": {
+                "2": "Farthest Forward",
+                "6": "Flat",
+                "11": "Farthest Back"
+            }
+                
         },
         {
             "name": "Y Position",
@@ -26,7 +38,13 @@
         {
             "name": "Current Lane",
             "address": "0x00B8",
-            "description": "Current lane of bike"
+            "description": "Current lane of bike (between values is between lanes)",
+            "values": {
+                "14": "Bottom lane",
+                "26": "Bottom middle lane",
+                "38": "Top middle lane",
+                "50": "Top lane"
+            }
         },
         {
             "name": "Velocity (Absolute)",
@@ -54,6 +72,53 @@
                 "2": "Slowed",
                 "4": "Changing Lanes"
             }
+        },
+        {
+            "name": "Course Map 0",
+            "address": "0x03C0",
+            "description": "First closest object to bike",
+            "values": {
+                "42": "Hill Top (Short)",
+                "59": "Nothing ahead",
+                "61": "Nothing ahead",
+                "80": "Hill Closest (Tall)",
+                "81": "Hill Closest (Tall)",
+                "86": "Hill Closest (Short)",
+                "112": "Mud Closest",
+                "114": "Mud Closest",
+                "136": "Front of the boost",
+                "137": "Back of the boost",
+                "141": "Ramp bottom",
+                "143": "Ramp bottom",
+                "144": "Mystery value Near Ramp Lane 2",
+                "146": "Mystery Value Near Ramp Lane 1",
+                "185": "Mud Middle",
+                "187": "Mud Middle",
+                "188": "Mud Farthest",
+                "190": "Mud Farthest",
+                "198": "Hill Closest (Tall)",
+                "200": "Downhill Hill Lowest",
+                "201": "Downhill Hill Mid",
+                "203": "Donwhill Hill Highest",
+                "223": "Ramp Top",
+                "228": "Grass",
+                "254": "Ramp/Hill Near Top"
+            }
+        },
+        {
+            "name": "Course Map 1",
+            "address": "0x03C1",
+            "description": "Second closest object to bike"
+        },
+        {
+            "name": "Course Map 2",
+            "address": "0x03C2",
+            "description": "Third closest objects to bike"
+        },
+        {
+            "name": "Course Map 3",
+            "address": "0x03C3",
+            "description": "Fourth closest objects to bike"
         }
     ]
 }
