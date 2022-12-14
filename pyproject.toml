@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "middletier"
-version = "1.0.0"
-description = "TODOt"
+name = "AutoHawkCore"
+version = "1.1.2"
+description = "The middle-tier for easily interfacing with the entire AutoHawk project"
 readme = "README.md"
 authors = ["Michael Hutts <mhutts@udel.edu>"]
-repository = "https://github.com/SuperBlueHenBros/middle-tier"
+repository = "https://github.com/SuperBlueHenBros/AutoHawkCore"
 
 [tool.poetry.dependencies]
 python = "^3.9"
