@@ -9,15 +9,15 @@ python.exe -m venv env
 .\env\Scripts\activate
 .\env\Scripts\python.exe -m pip install --upgrade pip
 
-Write-Host -ForegroundColor Yellow "Cloning and installing bizhook"
+Write-Host -ForegroundColor Yellow "Cloning and installing API client library"
 # get bizhook's latest version from repo
 mkdir lib\bizhook
-git clone https://github.com/SuperBlueHenBros/Bizhook.git lib\bizhook
+git clone https://github.com/SuperBlueHenBros/AutoHawkAPI-Client.git lib\bizhook
 python.exe -m pip install -e lib\bizhook
 
-Write-Host -ForegroundColor Yellow "Cloning the lua hook for bizhawk"
+Write-Host -ForegroundColor Yellow "Cloning the lua API server hook for bizhawk"
 # get the latest lua-components
-git clone https://github.com/SuperBlueHenBros/lua-components.git lib\lua-components
+git clone https://github.com/SuperBlueHenBros/AutoHawkAPI-Server.git lib\lua-components
 
 Write-Host -ForegroundColor Yellow "Installing any dependencies"
 # install pynput for using keyboard input
