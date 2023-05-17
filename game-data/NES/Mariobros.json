@@ -99,7 +99,12 @@
         {
             "name": "PlayerHorizontal",
             "address": "0x006D",
-            "description": "I THOGUHT IT WAS: Describes if player is dead (0 if alive, 1 if dead)"  
+            "description": "Describes the x distance traveled on the screen"  
+        },
+        {
+            "name": "PlayerXPos",
+            "address": "0x0071D",
+            "description": "Describes the current x screen the player is on"
         },
         {
             "name": "PlayerX",
@@ -143,14 +148,14 @@
 
         },
         {
-            "name": "PlayerXPos",
-            "address": "0x0071D",
-            "description": "Describes if player is moving right or left"
-        },
-        {
             "name": "PlayerYPos",
             "address": "0x00CE",
             "description": "Describes current y position on screen"         
+        },
+        {
+            "name": "VerticalScreenPos",
+            "address": "0x00B5",
+            "description": "4+ when falling down a pit"
         }
     ]
 }
